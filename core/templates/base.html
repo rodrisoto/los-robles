@@ -1,32 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
     <title>Sistema</title>
 
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Iconos -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         body {
+            margin: 0;
             background: #f4f6f9;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .navbar {
-            background: linear-gradient(90deg, #2c5cc5, #3a7bd5);
+        /* SIDEBAR */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            position: fixed;
+            background: linear-gradient(180deg, #1e3c72, #2a5298);
+            color: white;
+            padding-top: 20px;
+            transition: 0.3s;
         }
+
+        .sidebar h4 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        .sidebar a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            transition: 0.3s;
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.15);
+            border-left: 4px solid #fff;
+        }
+
+        .sidebar a.active {
+            background: rgba(255,255,255,0.2);
+            border-left: 4px solid #fff;
+        }
+
+        /* CONTENIDO */
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            box-shadow: 0px 2px 8px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* CARDS PRO */
+        .card-pro {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+
+        .card-pro:hover {
+            transform: translateY(-5px);
+        }
+
     </style>
-
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark px-3">
-    <span class="navbar-brand fw-bold">💊 Sistema de Medicación</span>
-    <a href="/logout/" class="btn btn-light">Cerrar sesión</a>
-</nav>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h4>💊 Sistema</h4>
 
-<div class="container mt-4">
+    <a href="/" class="{% if request.path == '/' %}active{% endif %}">
+        <i class="bi bi-house-door-fill"></i> Inicio
+    </a>
+
+    <a href="/pacientes/" class="{% if 'pacientes' in request.path %}active{% endif %}">
+        <i class="bi bi-people-fill"></i> Pacientes
+    </a>
+
+    <a href="/medicamentos/" class="{% if 'medicamentos' in request.path %}active{% endif %}">
+        <i class="bi bi-capsule"></i> Medicamentos
+    </a>
+
+    <a href="/dosis/" class="{% if 'dosis' in request.path %}active{% endif %}">
+        <i class="bi bi-clock-history"></i> Dosis
+    </a>
+</div>
+
+<!-- CONTENIDO -->
+<div class="content">
+
+    <!-- TOPBAR -->
+    <div class="topbar mb-4">
+        <div>
+            <strong>Dashboard</strong>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <span>👤 {{ request.user.username }}</span>
+            <a href="/logout/" class="btn btn-danger btn-sm">
+                <i class="bi bi-box-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- CONTENIDO DINÁMICO -->
     {% block content %}
     {% endblock %}
+
 </div>
 
 </body>

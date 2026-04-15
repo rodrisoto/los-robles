@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Pacientes 👤</h2>
+
+<!-- 🔥 BOTÓN NUEVO -->
+<a href="{% url 'paciente_create' %}" class="btn btn-primary mb-3">
+    ➕ Nuevo Paciente
+</a>
+
+<div class="card shadow border-0">
+    <div class="card-body">
+
+        <table class="table table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Habitación</th>
+                    <th class="text-end">Acciones</th> <!-- 🔥 NUEVO -->
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for p in pacientes %}
+                <tr>
+                    <td>{{ p.nombres }} {{ p.apellidos }}</td>
+                    <td>{{ p.habitacion }}</td>
+
+                    <!-- 🔥 BOTONES -->
+                    <td class="text-end">
+                        <a href="{% url 'paciente_update' p.id_paciente %}" 
+                           class="btn btn-warning btn-sm">
+                            ✏️ Editar
+                        </a>
+
+                        <a href="{% url 'paciente_delete' p.id_paciente %}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Eliminar paciente?')">
+                            🗑️ Eliminar
+                        </a>
+                    </td>
+
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">
+                        No hay pacientes
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
+{% endblock %}

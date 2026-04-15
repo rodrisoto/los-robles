@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2 class="mb-4">Nuevo Paciente 👤</h2>
+
+<div class="card shadow border-0">
+    <div class="card-body">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label>RUT</label>
+                {{ form.rut }}
+            </div>
+
+            <div class="mb-3">
+                <label>Nombres</label>
+                {{ form.nombres }}
+            </div>
+
+            <div class="mb-3">
+                <label>Apellidos</label>
+                {{ form.apellidos }}
+            </div>
+
+            <div class="mb-3">
+                <label>Habitación</label>
+                {{ form.habitacion }}
+            </div>
+
+            <div class="mb-3">
+                <label>Fecha de Nacimiento</label>
+                {{ form.fecha_nacimiento }}
+            </div>
+
+            <button class="btn btn-success">Guardar</button>
+            <a href="{% url 'pacientes' %}" class="btn btn-secondary">Cancelar</a>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

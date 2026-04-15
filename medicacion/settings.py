@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'gestion_medicacion',
         'USER': 'root',
         'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
@@ -131,5 +131,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 import pymysql
 pymysql.install_as_MySQLdb()
 
-LOGIN_REDIRECT_URL = '/app/'
-LOGOUT_REDIRECT_URL = '/'
+# 🔐 REDIRECCIONES
+
+LOGIN_URL = '/login/'              # si no está logueado → va al login
+LOGIN_REDIRECT_URL = '/'           # después de login → dashboard
+LOGOUT_REDIRECT_URL = '/login/'    # después de logout → login
