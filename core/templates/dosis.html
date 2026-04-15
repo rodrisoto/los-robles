@@ -1,0 +1,20 @@
+<h1>Dosis Pendientes 💊</h1>
+
+<table border="1">
+    <tr>
+        <th>Paciente</th>
+        <th>Fecha</th>
+        <th>Estado</th>
+    </tr>
+
+    {% for d in dosis %}
+    <tr>
+        <td>{{ d.id_historial_dosis.id_tratamiento.id_paciente.nombres }}</td>
+        <td>{{ d.fecha_hora_programada }}</td>
+        <td>{{ d.estado }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<br>
+<a href="/app/">Volver al dashboard</a>
